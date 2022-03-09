@@ -18,7 +18,7 @@ app.get('/', async (req, res) => {
 app.post('/createOrder', async (req, res) => {
   try {
     let data = {
-      orderId: req.body.id,
+      orderId: req.body.orderId,
       customerId: req.body.customerId,
       amount: req.body.amount,
     };
