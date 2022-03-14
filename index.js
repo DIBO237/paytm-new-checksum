@@ -1,5 +1,7 @@
 const https = require('https');
 const express = require('express');
+const env = require('dotenv')
+env.config()
 /*
  * import checksum generation utility
  * You can get this utility from https://developer.paytm.com/docs/checksum/
@@ -25,7 +27,7 @@ app.post('/createOrder', async (req, res) => {
     var paytmParams = {};
     paytmParams.body = {
       requestType: 'Payment',
-      mid: 'EcWTAk01170313958935',
+      mid: process.env.MID,
       orderId: data.orderId,
       callbackUrl: `https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=${data.orderId}`,
       txnAmount: {
@@ -43,7 +45,7 @@ app.post('/createOrder', async (req, res) => {
      */
     PaytmChecksum.generateSignature(
       JSON.stringify(paytmParams.body),
-      'Nm2SVBVbzvKyAWpI'
+      process.env.MKEY
     ).then(function (checksum) {
       paytmParams.head = {
         signature: checksum,
@@ -89,7 +91,7 @@ app.post('/createOrder', async (req, res) => {
   }
 });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
   console.log(`Server is running on ${port}`);
