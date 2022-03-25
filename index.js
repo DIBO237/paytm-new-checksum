@@ -29,7 +29,7 @@ app.post('/createOrder', async (req, res) => {
       requestType: 'Payment',
       mid: process.env.MID,
       orderId: data.orderId,
-      callbackUrl: `https://securegw-stage.paytm.in/theia/paytmCallback?ORDER_ID=${data.orderId}`,
+      callbackUrl: `https://securegw.paytm.in/theia/paytmCallback?ORDER_ID=${data.orderId}`,
       txnAmount: {
         value: data.amount,
         currency: 'INR',
