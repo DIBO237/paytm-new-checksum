@@ -58,7 +58,7 @@ app.post('/createOrder', async (req, res) => {
         hostname: 'securegw-stage.paytm.in' /* for Production */, // hostname: 'securegw.paytm.in',
 
         port: 443,
-        path: `/theia/api/v1/initiateTransaction?mid=EcWTAk01170313958935&orderId=${data.orderId}`,
+        path: `/theia/api/v1/initiateTransaction?mid=${process.env.MID}&orderId=${data.orderId}`,
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
